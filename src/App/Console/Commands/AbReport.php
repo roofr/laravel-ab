@@ -36,26 +36,20 @@ class AbReport extends Command
         $list = $this->option('list', false);
 
         if ($list == true) {
-            $this->prettyPrint($this->listReports());
+            $this->info('To Be Implemented');
 
             return true;
         }
 
         if (!empty($experiment)) {
-            $this->prettyPrint($this->printReport($experiment));
+            $this->printReport($experiment);
         } else {
             $reports = $this->listReports();
             $info = [];
             foreach ($reports as $report) {
                 $info[$report->experiment] = $this->printReport($report->experiment);
             }
-            $this->prettyPrint($info);
         }
-    }
-
-    public function prettyPrint($info)
-    {
-        $this->info(json_encode($info, JSON_PRETTY_PRINT));
     }
 
     public function printReport($experiment)
@@ -93,6 +87,9 @@ class AbReport extends Command
         usort($info, function ($a, $b) {
             return $a['conversion'] < $b['conversion'];
         });
+
+        $this->info("\r\nExperiment: {$experiment}");
+        $this->table(["Condition", "Hits", "Goals", "Conversion"], $info);
 
         return $info;
     }

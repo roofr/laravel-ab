@@ -2,7 +2,9 @@
 
 namespace ComoCode\LaravelAb\App;
 
-class Experiments extends \Eloquent
+use Illuminate\Database\Eloquent\Model;
+
+class Experiments extends Model
 {
     protected $table = 'ab_experiments';
     protected $fillable = ['experiment', 'goal'];
@@ -12,7 +14,7 @@ class Experiments extends \Eloquent
         return $this->hasMany('ComoCode\LaravelAb\App\Events');
     }
 
-    /*public function goals(){
-        return $this->hasMany('EightyTwoRules\LaravelAb\Goal', 'goal','goal');
-    }*/
+    public function goals(){
+        return $this->hasMany('ComoCode\LaravelAb\App\Goal', 'goal', 'goal');
+    }
 }
