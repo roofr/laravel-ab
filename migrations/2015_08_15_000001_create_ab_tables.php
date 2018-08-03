@@ -34,7 +34,7 @@ class CreateAbTables extends Migration {
         {
             $table->increments('id');
             $table->string('instance');
-            $table->string('identifier');
+            $table->string('identifier')->nullable();
             $table->string('metadata')->nullable();
             $table->timestamps();
         });
